@@ -8,27 +8,39 @@ function renderButtons() {
 	$.each(topics, function(index, topic) {
 		var btn = $("<button>");
 		btn.append(topic);
-		btn.addClass("gif-click")
+		btn.addClass("gif-click");
 		btn.attr("gif-name", topic);
 		$("#button-generator").append(btn);	
 	});
 };
 
-$("#gif-button").click( function(event) {
+function addNewButton(userInput) {
+	// var newGif = topics[topics.length - 1];
+	topics.push(userInput);
+
+	var btn = $("<button>");
+	btn.append(userInput);
+	btn.addClass("gif-click");
+	btn.attr("gif-name", userInput)
+	$("#button-generator").append(btn);
+	// console.log(newGif);
+	$("body").load("index.html", "#button-generator")
+
+};
+
+$("#gif-button").click(function(event) {
 	event.preventDefault();
 	
 	var userInput = $("#gif-text").val();
 	topics.push(userInput);
 	console.log(topics);
-
-	renderButtons();
-
+	addNewButton(userInput);
 });
 
 renderButtons();
 
 
-$(".gif-click").click(function(){
+$('#button-generator').on('click', '.gif-click', function() {
 	var image = $(this).attr("gif-name");
 
 	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
@@ -55,11 +67,16 @@ $(".gif-click").click(function(){
             gifDiv.prepend(personImage);
             console.log(results);
             $("#gifs").prepend(gifDiv);
-          }
+          };
         });
+        console.log("button clicked");
 });
 
+$("img").click(function() {
+	// Pausing videos goes here
 
+
+});
 
 
 }); // onReady function
