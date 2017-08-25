@@ -1,0 +1,39 @@
+body {
+	/*background-color: rgb(65, 211, 204);
+	color: white;*/
+}
+
+.jumbotron {
+	background-color: rgb(74, 234, 218);
+	color: white;
+}
+
+#generated-form {
+	color: 
+}
+
+.btn {
+	background-color: rgb(74, 234, 218);
+	color: white;
+}
+
+
+.btn:hover { 
+	background-color: rgb(64,224,208);
+	color: white; 
+}
+
+.btn:active {
+	background-color: rgb(54,214,198);
+	color: white;
+}
+
+.btn:focus {
+	background-color: rgb(74, 234, 218);
+	color: white;
+}
+
+.form-group label {
+	font-size: 24px;
+	color: rgb(74, 234, 218);
+}

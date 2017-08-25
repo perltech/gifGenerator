@@ -9,6 +9,7 @@ function renderButtons() {
 		var btn = $("<button>");
 		btn.append(topic);
 		btn.addClass("gif-click");
+    btn.addClass("btn");
 		btn.attr("gif-name", topic);
     btn.attr("data-state", "still");
 		$("#button-generator").append(btn);	
