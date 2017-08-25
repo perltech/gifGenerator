@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-var topics = ["Erykah Badu", "Man or Astroman", "Pink Floyd", "Jurassic 5"];
+var topics = ["Erykah Badu", "Devin Townsend", "Pink Floyd", "David Bowie", "Thundercat"];
 
 function renderButtons() {
 	$("#button-generator").html("<div></div>");
@@ -10,22 +10,9 @@ function renderButtons() {
 		btn.append(topic);
 		btn.addClass("gif-click");
 		btn.attr("gif-name", topic);
+    btn.attr("data-state", "still");
 		$("#button-generator").append(btn);	
 	});
-};
-
-function addNewButton(userInput) {
-	// var newGif = topics[topics.length - 1];
-	topics.push(userInput);
-
-	var btn = $("<button>");
-	btn.append(userInput);
-	btn.addClass("gif-click");
-	btn.attr("gif-name", userInput)
-	$("#button-generator").append(btn);
-	// console.log(newGif);
-	$("body").load("index.html", "#button-generator")
-
 };
 
 $("#gif-button").click(function(event) {
@@ -34,10 +21,13 @@ $("#gif-button").click(function(event) {
 	var userInput = $("#gif-text").val();
 	topics.push(userInput);
 	console.log(topics);
-	addNewButton(userInput);
+	renderButtons();
 });
 
 renderButtons();
+// $("#gif-text").removeAttr("value");
+// $("#gif-text").attr("placeholder", "Enter a new gif here")
+//  I want to strip out current value in input field and replace with placeholder text
 
 
 $('#button-generator').on('click', '.gif-click', function() {
@@ -59,12 +49,15 @@ $('#button-generator').on('click', '.gif-click', function() {
             var rating = results[i].rating;
 
             var p = $("<p>").text("Rating: " + rating);
+            p.addClass("rating");
 
-            var personImage = $("<img>");
-            personImage.attr("src", results[i].images.fixed_height.url);
+            var image = $("<img>");
+            image.attr("src", results[i].images.fixed_height.url);
+            image.attr("data-state", "still");
+            image.addClass("gif");
 
             gifDiv.prepend(p);
-            gifDiv.prepend(personImage);
+            gifDiv.prepend(image);
             console.log(results);
             $("#gifs").prepend(gifDiv);
           };
@@ -72,9 +65,19 @@ $('#button-generator').on('click', '.gif-click', function() {
         console.log("button clicked");
 });
 
-$("img").click(function() {
+$("body").on("click", ".gif", function() {
 	// Pausing videos goes here
+  var state = $(this).attr("data-state");
+  var src = $(this).attr("src")
 
+  if (state === "still") {
+    $(this).attr("src", src.replace(/\.gif/i, "_s.gif"));
+    $(this).attr("data-state", "animate");
+  } 
+  else {
+    $(this).attr("src", src.replace(/\_s\.gif/i, ".gif"));
+    $(this).attr("data-state", "still");
+  }
 
 });
 
