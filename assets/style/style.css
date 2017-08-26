@@ -37,3 +37,9 @@ body {
 	font-size: 24px;
 	color: rgb(74, 234, 218);
 }
+
+img {
+	height: 250px;
+	width: 250px;
+	margin: 10px;
+}

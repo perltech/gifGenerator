@@ -32,10 +32,11 @@ renderButtons();
 
 
 $('#button-generator').on('click', '.gif-click', function() {
+  $("#gifs").html("<div></div>")
 	var image = $(this).attr("gif-name");
 
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        image + "&api_key=dc6zaTOxFJmzC&limit=10";
+        image + "&api_key=dc6zaTOxFJmzC&limit=12";
 
       $.ajax({
           url: queryURL,
@@ -59,7 +60,8 @@ $('#button-generator').on('click', '.gif-click', function() {
 
             gifDiv.prepend(p);
             gifDiv.prepend(image);
-            console.log(results);
+            gifDiv.addClass("col-lg-3");
+            console.log(results); 
             $("#gifs").prepend(gifDiv);
           };
         });
